@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "**To Bootstrap or not to Bootstrap?**"
-date:   2017-01-18 22:00:18 +0000
+title:  "To Bootstrap or not to Bootstrap?"
+date:   2017-01-18 17:00:19 -0500
 ---
 
 
