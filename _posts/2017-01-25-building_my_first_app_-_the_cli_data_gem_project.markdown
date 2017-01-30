@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Building my first app - The CLI Data Gem Project"
-date:   2017-01-25 21:57:49 +0000
+date:   2017-01-25 16:57:50 -0500
 ---
 
 
@@ -19,10 +19,14 @@ Haha. Luckily, a discussion with my instructor showed me that I was getting in a
 
 In the end, I made an app that could pull the latest 20 videos from youtube for each of the climbing locations and display them in chronological order. Then the user could choose a video from the list to get more information. I'm happy with it! I feel more confident about my ability to get multiple classes to collaborate and have a better understanding about separating my methods into the right classes. By the end, I felt really good about reading error messages, and working through them one by one to get my program to work. 
 
-TAKEAWAYS:
+I ran into a second set of issues when I tried to publish my gem to rubygems.org. My app worked fine when I ran my bin file, but when I installed my gem from the site, I was getting an Uninitialized Constant (NameError) for my module name - SeClimbingVideos. After some trial and error, I realized I had an issue declaring the module name twice because of the version.rb file set up by Bundlr (which is how I started my gem). I ended up scrapping my config/environment.rb file and embracing the file structure made by Bundlr, which expects that information in a different file![](http://). I also had to define a Class Constant with all of my locations within my CLI. I orginally had this constant defined in my module, which was inherited into the CLI. The constant was only used in the CLI file, so I moved it over. I thought the other way was prettier, but I'd rather work within the structure I have set up instead of trying to fight against it.
+### TAKEAWAYS:
 
 - Use your resources! They really help.
 - Start simple - you can always make things more complex later. 
 - There are multiple ways to code everything! And this is your first time trying to figure that part out, so give yourself some slack and reach out for help if you need it. 
+- Understand your Gemspec (especially the files and executables portion) - I found it easier to understand how Bundlr set this up and work around it. I ran into issues when I tried to change the file required to run the app instead of working with the Bundlr template. 
 
-CHECK OUT MY APP HERE: [https://github.com/liahwallace1/se-climbing-videos-cli-app](https://github.com/liahwallace1/se-climbing-videos-cli-app)
+**CHECK OUT MY CODE HERE:** [https://github.com/liahwallace1/se-climbing-videos-cli-app](https://github.com/liahwallace1/se-climbing-videos-cli-app)
+
+**DOWNLOAD MY GEM HERE:** [https://rubygems.org/gems/se_climbing_videos](https://rubygems.org/gems/se_climbing_videos)
