@@ -1,0 +1,21 @@
+# Site settings
+title: Liah
+header-img: img/home-bg.png
+email: liahwallace1@gmail.com
+copyright_name: liahwallace1
+description: > # this means to ignore newlines until "baseurl:"
+  Adventures in coding
+baseurl: "" # the subpath of your site, e.g. /blog
+twitter_username:
+github_username:  liahwallace1
+learn_profile: liahwallace1
+email_username: liahwallace1@gmail.com
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+permalink: pretty
+paginate: 5
+exclude: ["less","node_modules","Gruntfile.js","package.json","README.md"]
+
+gems: [jekyll-paginate, jekyll-feed]
