@@ -9,20 +9,20 @@ Yay me! I just finished up the front end portion of my MyKadima Rails applicatio
 
 Issue #1: **this** keyword not binding to the Event Target
 
-TLDR: try using function(e) {} INSTEAD OF (e) => {} to define your function
+*TLDR: try using function(e) {} INSTEAD OF (e) => {} to define your function.*
 
 To some, this may seem simple, but I spent hours googling why my $(this) call in my click handlers was not binding to my event target. This made it near impossible to use data attributes I had embedded in my HTML, and therefore, I had trouble getting my URLs to show up correctly (an issue for nested resources with URLs like "/users/${userId}/games"). I realized that I was using the shorthand arrow notation to create my functions in my click handler. With arrow notation, THIS is always tied to your Window instead of your click event. A simple solution to a big issue!
 
 
 Issue #2: Passing Rails Model Methods to my jQuery page templates
 
-TLDR: Put it in your Serializer
+*TLDR: Put it in your Serializer.*
 
 Upon Googling, I found a TON of ways to pass data from Rails to JS including create a custom API endpoint, use data attributes, use <%= javascript_tag do %> in your html.erb file, use the gon gem, use .js.erb files, use the serializer. I didn't know where to turn. I was using data attributes to send little information like my database IDs, but I had a lot of methods to give Users stats on the games they were uploading. I decided to use the serializer to pass information. Most of the stats were on my User Profile (user show page/user model), so I included the method names as attributes in my User Serializer. I also created a few custom methods using the methods from my model to account for some outlier behavior. Lastly, I made my current_user method available to my serializer to help me run my methods. Do this my putting `serialization_scope :view_context` in your Application Controller, and `delegate :current_user, to: :scope` in my serializers. 
 
 Issue #3: My GET requests would work with `$.ajax`, but didn't send back JSON if I used `$.fetch` or `$.get`
 
-TLDR: Include your credentials with fetch so the cookie sends
+*TLDR: Include your credentials with fetch so the cookie sends.*
 
 When I was first working on my GET requests through AJAX, I was trying to use the `fetch` method (thanks to an amazing lecture by Cernan that helped me get started). I thought I was setting it up right, but my response was always in HTML instead of JSON, and I couldn't get it to convert with `.serialize()`, `.json()`, or `.getJSON()`. After exhaustive Googling turned up no info I could understand, I switched my request to use the `.ajax` method, and it worked! I talked with Cernan about it, and he figured out that "when you send a fetch request, the cookie wasn't being sent in the fetch request, so when your before_action hook of require_login was returning false, causing a redirect to the root_path (check the rails server when trying it using the fetch request)". We were able to get it working with this code: 
 
