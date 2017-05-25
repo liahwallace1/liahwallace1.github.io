@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  Thoughts on finishing my JQuery Project!
+title:  Issues I tackled in my JQuery Project!
 date:   2017-05-25 10:39:15 -0400
 ---
 
