@@ -95,17 +95,13 @@ I also added the action for this reducer to the Actions file.
 
 In the main component that is holding the map feature, I added a `resize` event listener that would dispatch the UPDATE_MAP_WIDTH reducer. I also added code to remove the event listener when the component was preparing to unmount. If you look at my GitHub repo, this code is in the Recommendation.js file, but it should go in the main page holding the map. 
 
-`componentDidMount() {`
-  `window.addEventListener('resize', () => this.props.dispatch(updateMapWidth()));`
-`}`
+`componentDidMount() {window.addEventListener('resize', () => this.props.dispatch(updateMapWidth()));}`
 
-`componentWillUnmount() {`
-   `window.removeEventListener('resize', () => this.props.dispatch(updateMapWidth()));`
- `}`
+`componentWillUnmount() {window.removeEventListener('resize', () => this.props.dispatch(updateMapWidth()));}`
 	
-	Lastly, you just need to call `mapStateToProps()` in your Map Component to map the map_width state you created to the component. Then, in the width field, you replace `window.innerWidth - 90` with `this.props.map_width` (edit to accomodate your projects state setup).
+Lastly, you just need to call `mapStateToProps()` in your Map Component to map the map_width state you created to the component. Then, in the width field, you replace `window.innerWidth - 90` with `this.props.map_width` (edit to accomodate your projects state setup).
 	
-	Sweet! Now, when the window is resized, your updateMapWidth() action will be called, which will change the state of map_width to your window size minus the margin size you chose. This state change will trigger the map component to re-render at the appropriate size. 
+Sweet! Now, when the window is resized, your updateMapWidth() action will be called, which will change the state of map_width to your window size minus the margin size you chose. This state change will trigger the map component to re-render at the appropriate size. 
 
 
 That's it! You can see all of my code at my [GitHub Repo](https://github.com/liahwallace1/chs-lunch-finder-client) for this project!
