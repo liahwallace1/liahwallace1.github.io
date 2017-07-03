@@ -18,42 +18,39 @@ When I started my React/Redux project, I knew I wanted to add filters (what good
 
 I created a reducer with an initial state:
 
-```
-let initialState = {
-    priceFilter: [],
-    locationFilter: [],
-    takeoutFilter: false,
-  }```
+`let initialState = {`
+    `priceFilter: [],`
+    `locationFilter: [],`
+    `takeoutFilter: false,`
+  `}`
 	
 This allows you to have multiple selections for your price filter and location filter, and a simple true or false option for Takeout, which only has the one option. Then, write reducers to ADD and REMOVE items from each of these filter states. For example:
 	
-```
-case 'ADD_PRICE_FILTER':
-      return Object.assign({}, state, { priceFilter: [...state.priceFilter, action.priceType], locationFilter: [...state.locationFilter], takeoutFilter: state.takeoutFilter})
 
-case 'REMOVE_PRICE_FILTER':
-      const newPriceFilter = state.priceFilter.filter((item) => item !== action.priceType)
-      return { priceFilter: newPriceFilter, locationFilter: [...state.locationFilter], takeoutFilter: state.takeoutFilter}
-```
+`case 'ADD_PRICE_FILTER':`
+      `return Object.assign({}, state, { priceFilter: [...state.priceFilter, action.priceType], locationFilter:` `[...state.locationFilter], takeoutFilter: state.takeoutFilter})`
+
+`case 'REMOVE_PRICE_FILTER':`
+      `const newPriceFilter = state.priceFilter.filter((item) => item !== action.priceType)`
+      `return { priceFilter: newPriceFilter, locationFilter: [...state.locationFilter], takeoutFilter: state.takeoutFilter}`
+
 			
 
 **STEP 2: Create Actions**
 
 You also need to create your actions for each of these reducers. For the price and zip code filters, we are going to send the target information to our reducer action, so you will write then like this:
 
-```
-export const addPriceFilter = (priceType) => {
-  return {
-    type: 'ADD_PRICE_FILTER', priceType
-  }
-}
+`export const addPriceFilter = (priceType) => {`
+  `return {`
+    `type: 'ADD_PRICE_FILTER', priceType`
+  `}`
+`}`
 
-export const removePriceFilter = (priceType) => {
-  return {
-    type: 'REMOVE_PRICE_FILTER', priceType
-  }
-}
-```
+`export const removePriceFilter = (priceType) => {`
+  `return {`
+    `type: 'REMOVE_PRICE_FILTER', priceType`
+  `}`
+`}`
 
 The Takeout filter is simpler, so we do not need to pass any payload to the reducer. This state just toggles between true and false.
 
@@ -63,22 +60,18 @@ This component is going to connect to the Redux store, so be sure to `import { c
 
 I used checkboxes in the browser so users can select multiple items in the filters. This is also great because you can easily use `e.target.clicked` in your click handlers to determine if you want to dispatch the ADD or REMOVE actions. I set up three different click handler functions in the component - one for each type of filter. Here is an example:
 
-```
-handlePriceFilter(e) {
-    let priceType = e.target.value
-    if (e.target.checked) {
-      this.props.dispatch(addPriceFilter(priceType));
-    } else {
-      this.props.dispatch(removePriceFilter(priceType));
-    }
-  }
-	```
+`handlePriceFilter(e) {`
+    `let priceType = e.target.value`
+    `if (e.target.checked) {`
+      `this.props.dispatch(addPriceFilter(priceType));`
+    `} else {`
+      `this.props.dispatch(removePriceFilter(priceType));`
+    `}`
+  `}`
 	
 This is dispatched when checkbox gets clicked because I have added an onClick listener to each input field:
 	
-	```
-	<input type="checkbox" value="$" onClick={(e) => this.handlePriceFilter(e)}/>$<br />
-	```
+`<input type="checkbox" value="$" onClick={(e) => this.handlePriceFilter(e)}/>$<br />`
 	
 In the browser, the filter will look like this when you have a few items clicked:
 	
@@ -91,30 +84,26 @@ This will update your state like this:
 **STEP 4: Write the function to change your Visible Restaurants**
 
 This is the convoluted part. I have another Component for my visible restaurants that uses all of the restaurants in the restaurantData state and the filters in the visibilityFilter states to return only the restaurants the user wants to see. Outside of the actual React Component class, I defined a function `getVisibleRestaurants` that takes in arguments of the restaurantData and filters. In this filter, I used a long list of if statements to go through all of the filters. The first statement is the situation where no filters are selected, and all of the restaurants are returned. 
-```
-if (filter.priceFilter.length === 0 && filter.locationFilter.length === 0 && filter.takeoutFilter === false) {
-    return restaurants
-```
+
+`if (filter.priceFilter.length === 0 && filter.locationFilter.length === 0 && filter.takeoutFilter === false) {`
+    `return restaurants`
+
 
 The next scenario has no price or location filters, but does include the takeout filter.
 
-```
-} else if (filter.priceFilter.length === 0 && filter.locationFilter.length === 0 && filter.takeoutFilter === true) {
-    return restaurants.filter((r) => r.takeout === true)
-```
+`} else if (filter.priceFilter.length === 0 && filter.locationFilter.length === 0 && filter.takeoutFilter === true) {`
+    `return restaurants.filter((r) => r.takeout === true)`
 
 Next, you could have a selection of every type of filter.
 
-```
-} else if (filter.priceFilter.length !== 0 && filter.locationFilter.length !== 0 && filter.takeoutFilter === true) {
-    var filteredRestaurants1 = []
-    restaurants.forEach(r => {
-      if (filter.priceFilter.indexOf(r.price) !== -1 && filter.locationFilter.indexOf(r.zip_code) !== -1) {
-        filteredRestaurants1.push(r)
-      }
-    })
-    return filteredRestaurants1.filter((r) => r.takeout === true)
-```
+`} else if (filter.priceFilter.length !== 0 && filter.locationFilter.length !== 0 && filter.takeoutFilter === true) {`
+    `var filteredRestaurants1 = []`
+    `restaurants.forEach(r => {`
+      `if (filter.priceFilter.indexOf(r.price) !== -1 && filter.locationFilter.indexOf(r.zip_code) !== -1) {`
+        `filteredRestaurants1.push(r)`
+      `}`
+    `})`
+    `return filteredRestaurants1.filter((r) => r.takeout === true)`
 
 Keep going to create options for:
 * price & location filters, no takeout filter
@@ -127,9 +116,7 @@ Keep going to create options for:
 
 In the render section of this Component, we call this long function passing in your states:
 
-```
-var restaurants = getVisibleRestaurants(this.props.restaurantData, this.props.visibilityFilter)
-```
+`var restaurants = getVisibleRestaurants(this.props.restaurantData, this.props.visibilityFilter)`
 
 Lastly, you pass this variable to your Restaurant List Component. This Component will go through each item in the restaurants variable and render a Restaurant component for each restaurant. 
 
