@@ -14,7 +14,7 @@ When I started my React/Redux project, I knew I wanted to add filters (what good
 * Zip Code: 2 string options ["29401", "29403"]. The zip codes separate the city at 1 main road. Users select the side of town they want to stay on by selecting "North of Calhoun" or "South of Calhoun", and it filters by zip code.
 * Takeout: Boolean (True for Yes and False for No or No Data)
 
-# STEP 1: Create Visibility Filter Reducer
+**STEP 1: Create Visibility Filter Reducer**
 
 I created a reducer with an initial state:
 
@@ -36,7 +36,7 @@ case 'REMOVE_PRICE_FILTER':
       return { priceFilter: newPriceFilter, locationFilter: [...state.locationFilter], takeoutFilter: state.takeoutFilter}
 ```
 			
-### STEP 2: Create Actions
+**STEP 2: Create Actions**
 
 You also need to create your actions for each of these reducers. For the price and zip code filters, we are going to send the target information to our reducer action, so you will write then like this:
 
@@ -56,7 +56,7 @@ export const removePriceFilter = (priceType) => {
 
 The Takeout filter is simpler, so we do not need to pass any payload to the reducer. This state just toggles between true and false.
 
-### STEP 3: Create Filter Component
+**STEP 3: Create Filter Component**
 
 This component is going to connect to the Redux store, so be sure to `import { connect } from 'react-redux'`. Also, you need to import all of your actions. We also need to use mapStateToProps to map our visibility filter state to this component's props. 
 
@@ -87,7 +87,7 @@ This will update your state like this:
 
  ![](http://i.imgur.com/S3ZUDgI.png?1)
 
-### STEP 4: Write the function to change your Visible Restaurants
+**STEP 4: Write the function to change your Visible Restaurants**
 
 This is the convoluted part. I have another Component for my visible restaurants that uses all of the restaurants in the restaurantData state and the filters in the visibilityFilter states to return only the restaurants the user wants to see. Outside of the actual React Component class, I defined a function `getVisibleRestaurants` that takes in arguments of the restaurantData and filters. In this filter, I used a long list of if statements to go through all of the filters. The first statement is the situation where no filters are selected, and all of the restaurants are returned. 
 ```
@@ -122,7 +122,7 @@ Keep going to create options for:
 * location and takeout filters only
 * location filter only
 
-STEP 5: Render correct restaurants
+**STEP 5: Render correct restaurants**
 
 In the render section of this Component, we call this long function passing in your states:
 
