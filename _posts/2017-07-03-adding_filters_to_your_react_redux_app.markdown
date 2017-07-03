@@ -10,8 +10,8 @@ When I started my React/Redux project, I knew I wanted to add filters (what good
 **GOAL**: Filter restaurant list by price, location, and takeout option
 
 **DATA**: The data I am using is coming from the Yelp Fusion API. It is first fetched by my Rails API backend to get only local data. Pertinent data points from the Yelp information is saved in my Rails database to share in this application. These are the database fields I'm using:
-* **Price**: 4 string options `["$", "$$", "$$$", "$$$$"]`
-* **Zip Code**: 2 string options `["29401", "29403"]`. The zip codes separate the city at 1 main road. Users select the side of town they want to stay on by selecting "North of Calhoun" or "South of Calhoun", and it filters by zip code.
+* **Price**: 4 string options `\["$", "$$", "$$$", "$$$$"\]`
+* **Zip Code**: 2 string options `\["29401", "29403"\]`. The zip codes separate the city at 1 main road. Users select the side of town they want to stay on by selecting "North of Calhoun" or "South of Calhoun", and it filters by zip code.
 * **Takeout**: `Boolean` (True for Yes and False for No or No Data)
 
 **STEP 1: Create Visibility Filter Reducer**
