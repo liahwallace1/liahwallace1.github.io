@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Adding Filters to your React/Redux app"
-date:   2017-07-03 04:52:11 +0000
+date:   2017-07-03 00:52:12 -0400
 ---
 
 
@@ -14,7 +14,7 @@ When I started my React/Redux project, I knew I wanted to add filters (what good
 * Zip Code: 2 string options ["29401", "29403"]. The zip codes separate the city at 1 main road. Users select the side of town they want to stay on by selecting "North of Calhoun" or "South of Calhoun", and it filters by zip code.
 * Takeout: Boolean (True for Yes and False for No or No Data)
 
-### STEP 1: Create Visibility Filter Reducer
+# STEP 1: Create Visibility Filter Reducer
 
 I created a reducer with an initial state:
 
