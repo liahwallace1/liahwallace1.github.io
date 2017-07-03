@@ -123,4 +123,4 @@ Lastly, you pass this variable to your Restaurant List Component. This Component
 
 THAT'S IT! Again, I think there should be another, probably better way to write the `getVisibleRestaurants` function. The length of the function would grow exponentially as you added more filters. This was my first foray into filters, and I hope to get better next time!
 
-
+Checkout my [GitHub Repo](https://github.com/liahwallace1/chs-lunch-finder-client) for all of the code!
