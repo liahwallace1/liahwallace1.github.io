@@ -36,6 +36,7 @@ case 'REMOVE_PRICE_FILTER':
       return { priceFilter: newPriceFilter, locationFilter: [...state.locationFilter], takeoutFilter: state.takeoutFilter}
 ```
 			
+
 **STEP 2: Create Actions**
 
 You also need to create your actions for each of these reducers. For the price and zip code filters, we are going to send the target information to our reducer action, so you will write then like this:
